@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<div id="demo">
+<h2>The XMLHttpRequest Object</h2>
+<!--<button type="button" onclick="loadDoc()">Change Content</button>-->
+</div>
+<table id="myTable">
+    <tr  class="bg-info">
+        <th align="left">Country</th>
+        <th align="left">capital</th>
+    </tr>
+
+
+</table>
+<script>
+loadDoc()
+function loadDoc() {
+  const xhttp = new XMLHttpRequest();
+  xhttp.onload = function() {
+    let x=JSON.parse(this.responseText)
+    let y = this.responseText
+    let z=x[1]
+<!--    document.getElementById("demo").innerHTML = x[0].name;-->
+     console.log(z.name);
+
+      buildTable(x)
+
+     function buildTable(data){
+		var table = document.getElementById('myTable')
+
+		for (var i = 0; i < data.length; i++){
+			var row = `<tr>
+							<td>${data[i].name}</td>
+                            <td>${data[i].capital}</td>
+					  </tr>`
+			table.innerHTML += row
+            }
+	    }
+
+  }
+  xhttp.open("GET", "https://restcountries.eu/rest/v2/all","true");
+  xhttp.send();
+
+
+
+
+}
+</script>
+
+</body>
+</html>
